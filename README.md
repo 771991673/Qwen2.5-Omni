@@ -1156,6 +1156,9 @@ curl http://localhost:8000/v1/chat/completions \
 To simplify the deploy process, we provide docker images with pre-build environments: [qwenllm/qwen-omni](https://hub.docker.com/r/qwenllm/qwen-omni). You only need to install the driver and download model files to launch demos.
 
 ```bash
+sudo docker build -t omni-int-img -f docker/Dockerfile-omni-2.5-cu121 . 
+```
+```bash
 docker run --gpus all --ipc=host --network=host --rm --name qwen2.5-omni -it qwenllm/qwen-omni:2.5-cu121 bash
 ```
 
