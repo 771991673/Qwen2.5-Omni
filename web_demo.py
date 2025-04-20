@@ -23,10 +23,10 @@ def _load_model_processor(args):
 
     # Check if flash-attn2 flag is enabled and load model accordingly
     if args.flash_attn2:
-        model = Qwen2_5OmniForConditionalGeneration.from_pretrained(args.checkpoint_path,
-                                                    torch_dtype='auto',
-                                                    attn_implementation='flash_attention_2',
-                                                    device_map=device_map)
+        bnb_config = transformers.BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16,
+                                                     bnb_4bit_use_double_quant=True, bnb_4bit_quant_type='nf4')
+
+        model = Qwen2_5OmniForConditionalGeneration.from_pretrained(model_path, torch_dtype=torch.bfloat16, low_cpu_mem_usage=True, quantization_config=bnb_config, attn_implementation="flash_attention_2")
     else:
         model = Qwen2_5OmniForConditionalGeneration.from_pretrained(args.checkpoint_path, device_map=device_map, torch_dtype='auto')
 

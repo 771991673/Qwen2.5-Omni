@@ -10,6 +10,7 @@ modelscope_studio==1.2.2
 git+https://github.com/huggingface/transformers
 accelerate
 av
+bitsandbytes
 
 # Optional dependency
 # Uncomment the following line if you need flash-attn
